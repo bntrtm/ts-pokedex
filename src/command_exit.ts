@@ -1,6 +1,7 @@
-import { cmdRegistry } from "./commander.js"
+import { State } from "./state.js"
 
-export function commandExit(registry: cmdRegistry): void {
+export function commandExit(state: State): void {
   console.log(`Closing the Pokedex... Goodbye!`);
+  state.rl.close();
   process.exit(0);
 };

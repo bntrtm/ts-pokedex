@@ -1,31 +1,25 @@
-import { createInterface } from "node:readline";
-import { getCommands } from "./commander.js";
+import { initState } from "./state.js";
 
 export function cleanInput(input: string): string[] {
   return input.toLowerCase().trim().split(" ").filter((word) => word !== "");
 }
 
 export function startREPL(): void {
-  const registry = getCommands()
 
-  const rl = createInterface({
-    input: process.stdin,
-    output: process.stdout,
-    prompt: "Pokedex > ",
-  });
+  let state = initState()
 
-  rl.prompt();
-  rl.on("line", (line) => {
+  state.rl.prompt();
+  state.rl.on("line", (line) => {
     const words = cleanInput(line);
     if (words.length === 0) {
       return
     } else {
       const [command, ...args] = words;
-      const run = registry[command];
+      const run = state.registry[command];
       if (run !== undefined) {
-        run.callback(registry);
+        run.callback(state);
       }
     }
-    rl.prompt();
+    state.rl.prompt();
   })
 }

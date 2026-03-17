@@ -1,8 +1,8 @@
-import { cmdRegistry } from "./commander.js"
+import { State } from "./state.js"
 
-export function commandHelp(registry: cmdRegistry): void {
+export function commandHelp(state: State): void {
   console.log(`Welcome to the Pokedex!\nUsage:\n`);
-  for (const [_, v] of Object.entries(registry)) {
-    console.log(`${v.name}: ${v.description}`)
+  for (const [_, v] of Object.entries(state.registry)) {
+    console.log(`${v.name}: ${v.description}`);
   }
 };
