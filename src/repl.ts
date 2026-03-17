@@ -1,10 +1,13 @@
 import { createInterface } from "node:readline";
+import { getCommands } from "./commander.js";
 
 export function cleanInput(input: string): string[] {
   return input.toLowerCase().trim().split(" ").filter((word) => word !== "");
 }
 
 export function startREPL(): void {
+  const registry = getCommands()
+
   const rl = createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -17,7 +20,11 @@ export function startREPL(): void {
     if (words.length === 0) {
       return
     } else {
-      console.log(`Your command was: ${words[0]}`)
+      const [command, ...args] = words;
+      const run = registry[command];
+      if (run !== undefined) {
+        run.callback(registry);
+      }
     }
     rl.prompt();
   })
