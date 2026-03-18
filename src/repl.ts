@@ -4,12 +4,11 @@ export function cleanInput(input: string): string[] {
   return input.toLowerCase().trim().split(" ").filter((word) => word !== "");
 }
 
-export function startREPL(): void {
-
+export async function startREPL(): Promise<void> {
   let state = initState()
 
   state.rl.prompt();
-  state.rl.on("line", (line) => {
+  state.rl.on("line", async (line) => {
     const words = cleanInput(line);
     if (words.length === 0) {
       return
@@ -17,7 +16,11 @@ export function startREPL(): void {
       const [command, ...args] = words;
       const run = state.registry[command];
       if (run !== undefined) {
-        run.callback(state);
+        try {
+          await run.callback(state);
+        } catch (err) {
+          throw new Error(`error: ${(err as Error).message}`)
+        }
       }
     }
     state.rl.prompt();
