@@ -17,7 +17,7 @@ export async function startREPL(): Promise<void> {
       const run = state.registry[command];
       if (run !== undefined) {
         try {
-          await run.callback(state);
+          await run.callback(state, ...args);
         } catch (err) {
           throw new Error(`error: ${(err as Error).message}`)
         }
