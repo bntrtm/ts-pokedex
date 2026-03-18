@@ -145,7 +145,21 @@ export type Location = {
   }[];
 };
 
+export function printPokemonStats(p: Pokemon): void {
+  console.log(`Height: ${p.height}`);
+  console.log(`Weight: ${p.weight}`);
+  console.log(`Stats:`)
+  for (const [_, stat] of p.stats.entries()) {
+    console.log(`  -${stat.stat.name}: ${stat.base_stat}`)
+  }
+  console.log(`Types:`);
+  for (const [_, type] of p.types.entries()) {
+    console.log(`  -${type.type.name}`);
+  }
+}
+
 export type Pokemon = {
+
   id: number
   name: string
   base_experience: number
@@ -427,4 +441,5 @@ export type Pokemon = {
       slot: number
     }>
   }>
+
 }
