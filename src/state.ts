@@ -4,7 +4,8 @@ import { commandHelp } from "./command_help.js";
 import { commandMap } from "./command_map.js";
 import { commandMapb } from "./command_map.js";
 import { createInterface, type Interface } from "readline";
-import { PokeAPI } from "./pokeapi.js";
+import { PokeAPI, Pokemon } from "./pokeapi.js";
+import { commandCatch } from "./command_catch.js";
 
 export type State = {
   api: PokeAPI;
@@ -12,7 +13,10 @@ export type State = {
   rl: Interface;
   nextLocationsURL: string;
   prevLocationsURL: string;
+  pokedex: pokedex;
 }
+
+export type pokedex = Record<string, Pokemon>
 
 export function initState(): State {
   return {
@@ -28,6 +32,7 @@ export function initState(): State {
     ),
     nextLocationsURL: "",
     prevLocationsURL: "",
+    pokedex: {},
   };
 }
 
@@ -49,6 +54,11 @@ export function getCommands(): cmdRegistry {
       name: "exit",
       description: "Exit the pokedex",
       callback: commandExit,
+    },
+    catch: {
+      name: "catch",
+      description: "Throw a pokeball at a pokemon!",
+      callback: commandCatch,
     },
     help: {
       name: "help",
