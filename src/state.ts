@@ -52,17 +52,17 @@ export function getCommands(): cmdRegistry {
     },
     help: {
       name: "help",
-      description: "Displays a help message",
+      description: "Show usage instructions (this)",
       callback: commandHelp,
     },
     map: {
       name: "map",
-      description: "Page areas pokemon may be found",
+      description: "Display next 20 locations",
       callback: commandMap,
     },
     mapb: {
       name: "mapb",
-      description: "Page previous areas pokemon may be found",
+      description: "Display previous 20 locations",
       callback: commandMapb,
     },
   };
