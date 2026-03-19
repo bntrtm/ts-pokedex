@@ -19,7 +19,7 @@ export async function startREPL(): Promise<void> {
         try {
           await run.callback(state, ...args);
         } catch (err) {
-          throw new Error(`error: ${(err as Error).message}`)
+          console.log(`error: ${(err as Error).message}`);
         }
       }
     }
