@@ -5,7 +5,7 @@ export function cleanInput(input: string): string[] {
 }
 
 export async function startREPL(): Promise<void> {
-  let state = initState()
+  let state = initState();
 
   state.rl.prompt();
   state.rl.on("line", async (line) => {
@@ -13,11 +13,18 @@ export async function startREPL(): Promise<void> {
     if (words.length === 0) {
       return
     } else {
-      const [command, ...args] = words;
-      const run = state.registry[command];
-      if (run !== undefined) {
+      const [commandName, ...args] = words;
+      const cmd = state.registry[commandName];
+      if (!cmd) {
+        console.log(
+          `Unknown command: "${commandName}". Type "help for a list of commands."`
+        );
+        state.rl.prompt();
+        return;
+      }
+      if (cmd !== undefined) {
         try {
-          await run.callback(state, ...args);
+          await cmd.callback(state, ...args);
         } catch (err) {
           console.log(`error: ${(err as Error).message}`);
         }
