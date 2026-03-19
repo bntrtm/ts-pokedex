@@ -7,6 +7,7 @@ import { createInterface, type Interface } from "readline";
 import { PokeAPI, Pokemon } from "./pokeapi.js";
 import { commandCatch } from "./command_catch.js";
 import { commandInspect } from "./command_inspect.js";
+import { commandPokedex } from "./command_pokedex.js";
 
 export type State = {
   api: PokeAPI;
@@ -80,6 +81,11 @@ export function getCommands(): cmdRegistry {
       name: "mapb",
       description: "Display previous 20 locations",
       callback: commandMapb,
+    },
+    pokedex: {
+      name: "pokedex",
+      description: "List the pokemon you've caught",
+      callback: commandPokedex,
     },
   };
 }
