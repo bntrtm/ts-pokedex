@@ -13,7 +13,7 @@ export async function commandMap(state: State): Promise<void> {
 
 export async function commandMapb(state: State): Promise<void> {
   if (!state.prevLocationsURL) {
-    console.log(`You're on the first page.`)
+    throw new Error(`You're on the first page.`)
   }
 
   const locations = await state.api.fetchLocations(state.prevLocationsURL);
