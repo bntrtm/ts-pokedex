@@ -1,3 +1,4 @@
+import { EndpointLocationArea, EndpointLocationAreas, EndpointPokemon } from "./endpoints.js";
 import { Cache } from "./pokecache.js"
 
 export class PokeAPI {
@@ -8,7 +9,7 @@ export class PokeAPI {
 
   async fetchLocations(pageURL?: string): Promise<ShallowLocations> {
 
-    const url = pageURL || `${PokeAPI.baseURL}/location-area`;
+    const url = pageURL || PokeAPI.baseURL + EndpointLocationAreas();
 
     if (url !== undefined) {
       const entry = this.#cache.get(url)
@@ -33,7 +34,7 @@ export class PokeAPI {
 
   async fetchLocation(locationName: string): Promise<Location> {
 
-    const url = `${PokeAPI.baseURL}/location-area/${locationName}`;
+    const url = PokeAPI.baseURL + EndpointLocationArea(locationName);
 
     if (url !== undefined) {
       const entry = this.#cache.get(url)
@@ -58,7 +59,7 @@ export class PokeAPI {
 
   async getPokemon(name: string): Promise<Pokemon> {
 
-    const url = `${PokeAPI.baseURL}/pokemon/${name}`;
+    const url = PokeAPI.baseURL + EndpointPokemon(name);
 
     if (url !== undefined) {
       const entry = this.#cache.get(url)
