@@ -8,7 +8,7 @@ This is a CLI tool imitating a "pokedex" using the [pokeapi.co](https://pokeapi.
 
 It is a guided project by [boot.dev](https://boot.dev), made for their students to further practice writing HTTP clients in TypeScript.
 
-You can see my Go version [here](https://github.com/bntrtm/pokedex-cli).
+You can [see my Go version here](https://github.com/bntrtm/pokedex-cli).
 
 ### Features
 
@@ -18,6 +18,15 @@ You can see my Go version [here](https://github.com/bntrtm/pokedex-cli).
 - list pokemon in your pokedex
 - inspect pokemon within your pokedex
 - in-memory cache
+
+### Differences
+
+As previously mentioned, this is the result of following a guided project.
+But apart from style, there are some differences/additions of my own built on top of it. Namely, this project:
+
+- introduces a function for interpolating instances of a string "formatting verb" (`%s`) within URL strings into substrings given via variadics.
+- uses the aforementioned function to build consistent endpoint URLs in a hierarchical fashion.
+  - This avoids needless repetition of endpoint construction, allowing endpoints to be defined in one single place.
 
 ## Installation
 
