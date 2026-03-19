@@ -27,7 +27,7 @@ export class Cache {
 
   #reap(): void {
     for (const [key, entry] of this.#cache) {
-      if (entry.createdAt < (Date.now() - this.#interval)) {
+      if (entry.createdAt <= (Date.now() - this.#interval)) {
         this.#cache.delete(key);
       }
     }
@@ -40,8 +40,9 @@ export class Cache {
   }
 
   #startReapLoop(): void {
-    const intervalID = setInterval(() => this.#reap(), this.#interval);
-    this.#reapIntervalId = intervalID;
+    this.#reapIntervalId = setInterval(() => {
+      this.#reap();
+    }, this.#interval);
   }
 
 }
