@@ -1,11 +1,12 @@
 import { printPokemonStats } from "./pokeapi.js";
+import { EMPTY_ARR } from "./constants.js";
 import type { State } from "./state.js";
 
 export async function commandInspect(
   state: State,
   ...args: string[]
 ): Promise<void> {
-  if (args.length === 0) {
+  if (args.length === EMPTY_ARR) {
     console.log(`Enter the name of a pokemon to inspect!`);
   }
 

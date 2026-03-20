@@ -1,10 +1,25 @@
+import {
+  THROW_OKAY,
+  THROW_GREAT,
+  THROW_GOOD,
+  THROW_LAZY,
+  THROW_INCREDIBLE,
+  DIFFICULTY_EASY,
+  DIFFICULTY_HARD,
+  DIFFICULTY_MEDIUM,
+  DIFFICULTY_VERY_EASY,
+  DIFFICULTY_VERY_HARD,
+  EMPTY_ARR,
+  UNIT_INTERVAL_100,
+  DIFFICULTY_NONE,
+} from "./constants.js";
 import type { State } from "./state.js";
 
 export async function commandCatch(
   state: State,
   ...args: string[]
 ): Promise<void> {
-  if (args.length === 0) {
+  if (args.length === EMPTY_ARR) {
     console.log(`No pokemon targeted. Enter a pokemon to throw at!`);
   }
 
@@ -15,35 +30,35 @@ export async function commandCatch(
 
   console.log(`\nThrowing a Pokeball at ${target}...`);
 
-  const throwResult = Math.random() * 100;
+  const throwResult = Math.random() * UNIT_INTERVAL_100;
   let caught = false;
 
   switch (true) {
-    case throwResult >= 95:
+    case throwResult >= THROW_INCREDIBLE:
       caught = true;
       break;
-    case inBracket(throwResult, 80, 95):
-      if (pokemon.base_experience < 275) {
+    case inBracket(throwResult, THROW_GREAT, THROW_INCREDIBLE):
+      if (pokemon.base_experience < DIFFICULTY_VERY_HARD) {
         caught = true;
       }
       break;
-    case inBracket(throwResult, 70, 80):
-      if (pokemon.base_experience < 220) {
+    case inBracket(throwResult, THROW_GOOD, THROW_GREAT):
+      if (pokemon.base_experience < DIFFICULTY_HARD) {
         caught = true;
       }
       break;
-    case inBracket(throwResult, 50, 70):
-      if (pokemon.base_experience < 120) {
+    case inBracket(throwResult, THROW_OKAY, THROW_GOOD):
+      if (pokemon.base_experience < DIFFICULTY_MEDIUM) {
         caught = true;
       }
       break;
-    case inBracket(throwResult, 30, 50):
-      if (pokemon.base_experience < 90) {
+    case inBracket(throwResult, THROW_LAZY, THROW_OKAY):
+      if (pokemon.base_experience < DIFFICULTY_EASY) {
         caught = true;
       }
       break;
-    case inBracket(throwResult, 0, 30):
-      if (pokemon.base_experience < 45) {
+    case inBracket(throwResult, DIFFICULTY_NONE, THROW_LAZY):
+      if (pokemon.base_experience < DIFFICULTY_VERY_EASY) {
         caught = true;
       }
       break;

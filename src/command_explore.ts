@@ -1,10 +1,11 @@
 import type { State } from "./state.js";
+import { EMPTY_ARR } from "./constants.js";
 
 export async function commandExplore(
   state: State,
   ...args: string[]
 ): Promise<void> {
-  if (args.length === 0) {
+  if (args.length === EMPTY_ARR) {
     console.log("no location provided.");
   }
 

@@ -14,13 +14,15 @@
   operand for EVERY instance of '%s' within the original string.
  */
 
+import { EMPTY_ARR } from "./constants.js";
+
 export const sVerb = "%s";
 
 export function interpStringVerbs(
   original: string,
   ...operands: string[]
 ): string {
-  if (operands.length === 0) {
+  if (operands.length === EMPTY_ARR) {
     throw new Error("no operands provided for interpolation");
   }
   let formatted = original;
