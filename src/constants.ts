@@ -2,7 +2,6 @@
 
 // math constants
 export const MS_PER_S = 1000;
-export const EMPTY_ARR = 0;
 
 // os exit codes
 export const EXIT_SUCCESS = 0;

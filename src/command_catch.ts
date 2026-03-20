@@ -9,7 +9,6 @@ import {
   DIFFICULTY_MEDIUM,
   DIFFICULTY_VERY_EASY,
   DIFFICULTY_VERY_HARD,
-  EMPTY_ARR,
   DIFFICULTY_NONE,
 } from "./constants.js";
 import type { State } from "./state.js";
@@ -18,7 +17,7 @@ export async function commandCatch(
   state: State,
   ...args: string[]
 ): Promise<void> {
-  if (args.length === EMPTY_ARR) {
+  if (args.length === 0) {
     console.log(`No pokemon targeted. Enter a pokemon to throw at!`);
   }
 

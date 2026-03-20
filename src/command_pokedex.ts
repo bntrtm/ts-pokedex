@@ -1,8 +1,7 @@
-import { EMPTY_ARR } from "./constants.js";
 import type { State } from "./state.js";
 
 export function commandPokedex(state: State): void {
-  if (Object.keys(state.pokedex).length === EMPTY_ARR) {
+  if (Object.keys(state.pokedex).length === 0) {
     console.log(`You have no pokemon in your pokedex!`);
   }
 
