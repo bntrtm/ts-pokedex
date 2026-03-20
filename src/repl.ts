@@ -1,35 +1,43 @@
-import { initState } from "./state.js";
+import type { State } from "./state.js";
 
 export function cleanInput(input: string): string[] {
-  return input.toLowerCase().trim().split(" ").filter((word) => word !== "");
+  return input
+    .toLowerCase()
+    .trim()
+    .split(" ")
+    .filter((word) => word !== "");
 }
 
-export async function startREPL(): Promise<void> {
-  let state = initState();
+export function startREPL(state: State): void {
+  const stateRef = state;
+  stateRef.rl.prompt();
 
-  state.rl.prompt();
-  state.rl.on("line", async (line) => {
-    const words = cleanInput(line);
-    if (words.length === 0) {
-      return
-    } else {
-      const [commandName, ...args] = words;
-      const cmd = state.registry[commandName];
-      if (!cmd) {
-        console.log(
-          `Unknown command: "${commandName}". Type "help for a list of commands."`
-        );
-        state.rl.prompt();
+  stateRef.rl.on("line", (input) => {
+    void (async () => {
+      const words = cleanInput(input);
+      if (words.length === 0) {
+        stateRef.rl.prompt();
         return;
       }
-      if (cmd !== undefined) {
-        try {
-          await cmd.callback(state, ...args);
-        } catch (err) {
-          console.log(`error: ${(err as Error).message}`);
-        }
+
+      const [commandName, ...args] = words;
+
+      const cmd = stateRef.registry[commandName];
+      if (typeof cmd === "undefined") {
+        console.log(
+          `Unknown command: "${commandName}". Type "help for a list of commands."`,
+        );
+        stateRef.rl.prompt();
+        return;
       }
-    }
-    state.rl.prompt();
-  })
+
+      try {
+        await cmd.callback(state, ...args);
+      } catch (err) {
+        console.log(`error:`, { cause: err });
+      }
+
+      stateRef.rl.prompt();
+    })();
+  });
 }

@@ -27,7 +27,7 @@ describe.each([
     const actual = cleanInput(input);
 
     expect(actual).toHaveLength(expected.length);
-    for (const i in expected) {
+    for (let i = 0; i < expected.length; i += 1) {
       expect(actual[i]).toBe(expected[i]);
     }
   });

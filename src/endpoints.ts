@@ -9,7 +9,7 @@ import { interpStringVerbs } from "./formatting_verbs.js";
   assumed.
 */
 
-export const pathParam = `/%s`
+export const pathParam = `/%s`;
 
 const URLLocationAreas = "/location-area";
 const URLLocationArea = URLLocationAreas + pathParam;

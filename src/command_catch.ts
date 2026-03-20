@@ -1,14 +1,17 @@
-import { State } from "./state.js"
+import type { State } from "./state.js";
 
-export async function commandCatch(state: State, ...args: string[]): Promise<void> {
-  if (args?.length === 0) {
+export async function commandCatch(
+  state: State,
+  ...args: string[]
+): Promise<void> {
+  if (args.length === 0) {
     console.log(`No pokemon targeted. Enter a pokemon to throw at!`);
-    return Promise.resolve();
   }
 
-  let target = args[0]
+  const stateRef = state;
+  const [target] = args;
 
-  const pokemon = await state.api.getPokemon(target);
+  const pokemon = await stateRef.api.getPokemon(target);
 
   console.log(`\nThrowing a Pokeball at ${target}...`);
 
@@ -44,18 +47,22 @@ export async function commandCatch(state: State, ...args: string[]): Promise<voi
         caught = true;
       }
       break;
+    default:
+      break;
   }
 
   if (caught) {
-    state.pokedex[target] = pokemon;
-    console.log(`You caught ${target}!\n`)
+    stateRef.pokedex[target] = pokemon;
+    console.log(`You caught ${target}!\n`);
   } else {
-    console.log(`You missed the pokemon!`)
+    console.log(`You missed the pokemon!`);
   }
-
-  return
 }
 
-function inBracket(input: number, moreOrEqualTo: number, lessThan: number): boolean {
+function inBracket(
+  input: number,
+  moreOrEqualTo: number,
+  lessThan: number,
+): boolean {
   return input >= moreOrEqualTo && input < lessThan;
 }

@@ -1,5 +1,6 @@
 import { Cache } from "./pokecache.js";
 import { test, expect } from "vitest";
+import { setTimeout } from "node:timers/promises";
 
 test.concurrent.each([
   {
@@ -19,10 +20,9 @@ test.concurrent.each([
   const cached = cache.get(key);
   expect(cached).toBe(val);
 
-  await new Promise((resolve) => setTimeout(resolve, interval * 2));
+  await setTimeout(interval * 2);
   const reaped = cache.get(key);
   expect(reaped).toBe(undefined);
 
   cache.stopReapLoop();
 });
-

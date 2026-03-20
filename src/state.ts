@@ -1,15 +1,14 @@
 import { commandExit } from "./command_exit.js";
 import { commandExplore } from "./command_explore.js";
 import { commandHelp } from "./command_help.js";
-import { commandMap } from "./command_map.js";
-import { commandMapb } from "./command_map.js";
-import { createInterface, type Interface } from "readline";
-import { PokeAPI, Pokemon } from "./pokeapi.js";
+import { commandMap, commandMapb } from "./command_map.js";
+import { createInterface, type Interface } from "node:readline";
 import { commandCatch } from "./command_catch.js";
 import { commandInspect } from "./command_inspect.js";
 import { commandPokedex } from "./command_pokedex.js";
+import { PokeAPI, type Pokemon } from "./pokeapi.js";
 
-export type State = {
+export interface State {
   api: PokeAPI;
   registry: cmdRegistry;
   rl: Interface;
@@ -18,32 +17,29 @@ export type State = {
   pokedex: pokedex;
 }
 
-export type pokedex = Record<string, Pokemon>
+export type pokedex = Record<string, Pokemon>;
 
-export function initState(): State {
+export function initState(cacheInterval: number): State {
   return {
-    api: new PokeAPI(),
+    api: new PokeAPI(cacheInterval),
     registry: getCommands(),
-    rl: createInterface(
-      {
-        input: process.stdin,
-        output: process.stdout,
-        prompt: "Pokedex > ",
-
-      }
-    ),
+    rl: createInterface({
+      input: process.stdin,
+      output: process.stdout,
+      prompt: "Pokedex > ",
+    }),
     nextLocationsURL: "",
     prevLocationsURL: "",
     pokedex: {},
   };
 }
 
-type CLICommand = {
+interface CLICommand {
   name: string;
   description: string;
-  callback: (state: State, ...args: string[]) => Promise<void>;
+  callback: (state: State, ...args: string[]) => Promise<void> | void;
 }
-export type cmdRegistry = Record<string, CLICommand>
+export type cmdRegistry = Record<string, CLICommand>;
 
 export function getCommands(): cmdRegistry {
   return {
@@ -89,4 +85,3 @@ export function getCommands(): cmdRegistry {
     },
   };
 }
-

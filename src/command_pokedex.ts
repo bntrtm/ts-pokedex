@@ -1,13 +1,12 @@
-import { State } from "./state.js"
+import type { State } from "./state.js";
 
-export async function commandPokedex(state: State): Promise<void> {
+export function commandPokedex(state: State): void {
   if (Object.keys(state.pokedex).length === 0) {
     console.log(`You have no pokemon in your pokedex!`);
-    return Promise.resolve();
   }
 
   console.log(`Your Pokedex:`);
-  for (const [name, _] of Object.entries(state.pokedex)) {
-    console.log(`  - ${name}`);
+  for (const pokemon of Object.values(state.pokedex)) {
+    console.log(`  - ${pokemon.name}`);
   }
 }

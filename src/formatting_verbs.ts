@@ -14,19 +14,24 @@
   operand for EVERY instance of '%s' within the original string.
  */
 
-export const sVerb = "%s"
+export const sVerb = "%s";
 
-export function interpStringVerbs(original: string, ...operands: string[]): string {
+export function interpStringVerbs(
+  original: string,
+  ...operands: string[]
+): string {
   if (operands.length === 0) {
-    throw new Error("no operands provided for interpolation")
+    throw new Error("no operands provided for interpolation");
   }
-  for (let i = 0; i < operands.length; i++) {
-    if (!(original.includes(sVerb))) {
-      throw new Error(`interpStringVerbs format %s reads arg #${i}, but call has ${i - 1} ${i - 1 === 0 ? "arg" : "args"}`);
+  let formatted = original;
+  for (let i = 0; i < operands.length; i += 1) {
+    if (!formatted.includes(sVerb)) {
+      throw new Error(
+        `interpStringVerbs format %s reads arg #${i}, but call has ${i - 1} ${i - 1 === 0 ? "arg" : "args"}`,
+      );
     }
-    original = original.replace("%s", operands[i]);
+    formatted = formatted.replace("%s", operands[i]);
   }
 
-  return original;
+  return formatted;
 }
-
