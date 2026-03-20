@@ -1,18 +1,18 @@
 // symbolic constants
 
-// math numbers
+// math constants
 export const MS_PER_S = 1000;
-
-// system numbers
-export const EXIT_SUCCESS = 0;
 export const EMPTY_ARR = 0;
 
+// os exit codes
+export const EXIT_SUCCESS = 0;
+
 // skill of a pokeball throw as a measure between 0-100
-export const THROW_INCREDIBLE = 95;
-export const THROW_GREAT = 80;
-export const THROW_GOOD = 70;
-export const THROW_OKAY = 50;
-export const THROW_LAZY = 30;
+export const THROW_INCREDIBLE = 0.95;
+export const THROW_GREAT = 0.8;
+export const THROW_GOOD = 0.7;
+export const THROW_OKAY = 0.5;
+export const THROW_LAZY = 0.3;
 
 // difficulty of catching pokemon as a measure between 0-275+
 // TODO: ignore enums and make this an enum
@@ -22,5 +22,3 @@ export const DIFFICULTY_MEDIUM = 120;
 export const DIFFICULTY_EASY = 90;
 export const DIFFICULTY_VERY_EASY = 45;
 export const DIFFICULTY_NONE = 0;
-
-export const UNIT_INTERVAL_100 = 100;

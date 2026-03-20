@@ -10,7 +10,6 @@ import {
   DIFFICULTY_VERY_EASY,
   DIFFICULTY_VERY_HARD,
   EMPTY_ARR,
-  UNIT_INTERVAL_100,
   DIFFICULTY_NONE,
 } from "./constants.js";
 import type { State } from "./state.js";
@@ -30,7 +29,7 @@ export async function commandCatch(
 
   console.log(`\nThrowing a Pokeball at ${target}...`);
 
-  const throwResult = Math.random() * UNIT_INTERVAL_100;
+  const throwResult = Math.random();
   let caught = false;
 
   switch (true) {
