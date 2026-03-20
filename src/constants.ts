@@ -1,7 +1,8 @@
 // symbolic constants
 
 // math constants
-export const MS_PER_S = 1000;
+export const MILLIS_PER_SEC = 1000;
+export const SEC_PER_MIN = 60;
 
 // os exit codes
 export const EXIT_SUCCESS = 0;
