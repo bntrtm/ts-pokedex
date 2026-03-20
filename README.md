@@ -32,7 +32,7 @@ But apart from style, there are some differences/additions of my own built on to
 
 ### Prerequisites
 
-You will need `Node.js` v22.15.0 (or higher) installed.
+You will need `Node.js` v25.8.1 (or higher) installed.
 
 You need [npm](https://github.com/npm) installed to manage dependencies and run the program (this should come with `Node.js`).
 

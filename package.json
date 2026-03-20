@@ -14,8 +14,12 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^25.5.0",
+    "jiti": "^2.6.1",
     "typescript": "^5.9.3",
     "vitest": "^4.1.0"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "eslint-config-love": "^151.0.0"
+  }
 }
