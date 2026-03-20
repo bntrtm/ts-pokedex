@@ -21,7 +21,6 @@ export default [
       "no-magic-numbers": "off",
       "@typescript-eslint/no-magic-numbers": ["error", { ignore: [-1, 0, 1] }],
       "@typescript-eslint/prefer-destructuring": "off",
-      "@typescript-eslint/restrict-template-expressions": "off",
       "@typescript-eslint/no-unsafe-type-assertion": "off",
     },
   },
