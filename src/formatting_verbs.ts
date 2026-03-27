@@ -27,10 +27,10 @@ export function interpStringVerbs(
   for (let i = 0; i < operands.length; i += 1) {
     if (!formatted.includes(sVerb)) {
       throw new Error(
-        `interpStringVerbs format %s reads arg #${i}, but call has ${i - 1} ${i - 1 === 0 ? "arg" : "args"}`,
+        `interpStringVerbs format ${sVerb} reads arg #${i + 1}, but call has ${i} ${i === 1 ? "arg" : "args"}\nformatted: ${formatted}`,
       );
     }
-    formatted = formatted.replace("%s", operands[i]);
+    formatted = formatted.replace(sVerb, operands[i]);
   }
 
   return formatted;
